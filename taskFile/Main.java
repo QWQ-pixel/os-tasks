@@ -7,15 +7,6 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.zip.*;
 
-/**
- *
- * Работа с файлами
- * Создать файл, записать данные в файл, прочитать файл, удалить файл.
- * Выполнить для следующих форматов:
- * txt, JSON, XML, Zip(добавить файл в архив и считать информацию о нем, определить размер архива).
- *
- */
-
 public class Main {
 
     static Scanner in=new Scanner(System.in);
