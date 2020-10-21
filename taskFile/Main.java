@@ -19,11 +19,19 @@ public class Main {
 	    Scanner in=new Scanner(System.in);
 	    num=in.nextInt();
             switch (num) {
-                case 2 -> NO2();
-                case 3 -> NO3();
-                case 4 -> NO4();
-                case 5 -> NO5();
-                default -> {
+		    case 2:
+			    NO2();
+			    break;
+		    case 3 : 
+			    NO3();
+			    break;
+		    case 4 :
+			    NO4();
+			    break;
+		    case 5: 
+			    NO5();
+			    break;
+                default : {
 
                     if(num<2||num>=6)
                     System.out.println("Wrong task number ");
@@ -51,9 +59,7 @@ public class Main {
 
         way="/Users/Documents/Hello.json";
 
-        fileCreate(way);
-        fileReader(way);
-        fileDelete(way);
+       
 
     }
     public static void NO4() throws IOException {
@@ -62,9 +68,7 @@ public class Main {
 
         way="/Users/Documents/Hello.xml";
 
-        fileCreate(way);
-        fileReader(way);
-        fileDelete(way);
+      
     }
     public static void NO5() throws IOException {
 
@@ -87,8 +91,7 @@ public class Main {
            long l=new File(way).length();
            System.out.println("Zip archive size: "+l+" b");
 
-           fileReader(filename);
-           fileDelete(way);
+           
 
         }
     public static void fileDelete(String way) throws IOException {
