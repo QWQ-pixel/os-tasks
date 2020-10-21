@@ -11,6 +11,7 @@ import static com.BruteForce.Main.start;
 import static com.BruteForce.Main.password;
 
 public class PassCheck extends Thread{
+    public static Instant start1= Instant.now();
     private static int count=0;
     @Override
     public void run(){
@@ -47,7 +48,10 @@ public class PassCheck extends Thread{
             for (Object h : hash) {
                 if (h.equals(sb.toString())) {
                     count++;
+                     Instant finish1 = Instant.now();
+                    long elapsed1 = Duration.between(start1, finish1).toMillis();
                     System.out.println("Password: " + password + " Hashcode: " + sb.toString());
+                    System.out.println("Time for check password: " + (elapsed1 / 1000) + " sec");
                 }
             }
         }
