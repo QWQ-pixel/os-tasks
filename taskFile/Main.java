@@ -1,11 +1,26 @@
 package com.taskFile;
 
-import java.io.File;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
-import java.util.zip.*;
+import java.util.List;
+import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 public class Main {
 
@@ -66,9 +81,98 @@ public class Main {
 
         System.out.println("\t Task №4 XML file");
 
-        way="/Users/Documents/Hello.xml";
+        way="/Users/IdeaProjects/taskFile/Hello.xml";
 
+        final File xmlFile = new File(way);
+        xmlReader(xmlFile);
+
+        Document doc;
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        doc = db.parse(xmlFile);
+
+        Element root = doc.getDocumentElement();
+
+        System.out.println("The root element is " + root.getNodeName() + ".\n");
+
+
+        Element staffElement = doc.createElement("staff");
+
+        Node updateText = doc.createTextNode("");
+        staffElement.appendChild(updateText);
+
+        Element firstName = doc.createElement("firstname");
+        System.out.println("Add firstname: ");
+        String str_firstName=in.nextLine();
+        Node firstNameNode = doc.createTextNode(str_firstName);
+        firstName.appendChild(firstNameNode);
+
+        staffElement.appendChild(firstName);
+
+        Element lastName = doc.createElement("lastname");
+        System.out.println("Add lastname: ");
+        String str_lastName=in.nextLine();
+        Node lastNameNode = doc.createTextNode(str_lastName);
+        lastName.appendChild(lastNameNode);
+
+        staffElement.appendChild(lastName);
+
+        Element nickName = doc.createElement("nickname");
+        System.out.println("Add nickname: ");
+        String str_nickName=in.nextLine();
+        Node nickNameNode = doc.createTextNode(str_nickName);
+        nickName.appendChild(nickNameNode);
+
+        staffElement.appendChild(nickName);
+
+        Element salary = doc.createElement("salary");
+        System.out.println("Add salary: ");
+        String str_salary=in.nextLine();
+        Node salaryNode = doc.createTextNode(str_salary);
+        salary.appendChild(salaryNode);
+        staffElement.appendChild(salary);
+
+        root.appendChild(staffElement);
+
+        try{
+            String outputURL = way;
+
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new FileOutputStream(outputURL));
+
+            TransformerFactory transFactory = TransformerFactory.newInstance();
+            Transformer transformer = transFactory.newTransformer();
+
+            transformer.transform(source, result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        xmlReader(xmlFile);
+        fileDelete(way);
       
+    }
+	private static void xmlReader(File file) throws ParserConfigurationException, IOException, SAXException {
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(file);
+
+            NodeList nodeList = doc.getElementsByTagName("staff");
+            for (int i = 0; i < nodeList.getLength(); i++) {
+
+                Node node = nodeList.item(i);
+                System.out.println();
+                System.out.println("Current item: " + node.getNodeName());
+                if (Node.ELEMENT_NODE == node.getNodeType()) {
+                    Element element = (Element) node;
+                    System.out.println("Name: " + element.getElementsByTagName("firstname").item(0).getTextContent());
+                    System.out.println("Lastname: " + element.getElementsByTagName("lastname").item(0).getTextContent());
+                    System.out.println("Nickname: " + element.getElementsByTagName("nickname").item(0).getTextContent());
+                    System.out.println("Salary: " + element.getElementsByTagName("salary").item(0).getTextContent());
+                }
+            }
     }
     public static void NO5() throws IOException {
 
