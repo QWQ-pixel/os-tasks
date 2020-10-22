@@ -7,22 +7,6 @@
    Выполнить для следующих форматов:
    txt, JSON, XML, Zip(добавить файл в архив и считать информацию о нем, определить размер архива).
    
-В XML файле:
-   <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<company>
-    <staff>
-        <firstname>Иван</firstname>
-        <lastname>Иванов</lastname>
-        <nickname>ivanov</nickname>
-        <salary>100000</salary>
-    </staff>
-    <staff>
-        <firstname>Петр</firstname>
-        <lastname>Петров</lastname>
-        <nickname>petrov</nickname>
-        <salary>200000</salary>
-    </staff>
-</company>
  
  * BruteForce:
  
