@@ -76,24 +76,36 @@ public class Main {
 
         String filename = "/Users/Documents/notes.txt";
         way="/Users/Documents/output.zip";
-            ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(way));
-            FileInputStream fis= new FileInputStream(filename);
-            ZipEntry entry1=new ZipEntry("notes.txt");
-            zout.putNextEntry(entry1);
+	    
+        ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(way));
+        File file = new File(filename);
 
-            byte[] buffer = new byte[fis.available()];
+        doZip(file, out);
+        System.out.println("File <notes.txt> add in zip archive.");
+        out.close();
 
-            zout.write(buffer);
-            System.out.println("File <notes.txt> add in zip archive.");
-                                                           
-            zout.closeEntry();
-
-           long l=new File(way).length();
-           System.out.println("Zip archive size: "+l+" b");
-
-           
+        zipReader(way);
+        long l=new File(way).length();
+        System.out.println("Zip archive size: "+l+" b");
+        fileDelete(way);
 
         }
+	private static void doZip(File dir, ZipOutputStream out) throws IOException {
+            if (dir.isDirectory())
+                doZip(dir, out);
+            else {
+                out.putNextEntry(new ZipEntry(dir.getPath()));
+                write(new FileInputStream(dir), out);
+            }
+    }
+	private static void write(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = in.read(buffer)) >= 0)
+            out.write(buffer, 0, len);
+        out.close();
+        in.close();
+    }
     public static void fileDelete(String way) throws IOException {
 
         System.out.println("Want to delete file? yes/no? ");
