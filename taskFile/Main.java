@@ -73,9 +73,66 @@ public class Main {
         System.out.println("\t Task №3 JSON file");
 
         way="/Users/Documents/Hello.json";
+	JSONParser parser = new JSONParser();
+        JSONArray a = (JSONArray) parser.parse(new FileReader(way));
 
-       
+        jsonRead(way);
+        String string;
 
+        JSONObject customer = new JSONObject();
+
+        System.out.println("Add new person: ");
+        System.out.println("Write name: ");
+        string=in.nextLine();
+        customer.put("name", string);
+
+
+        System.out.println("Write City: ");
+        string=in.nextLine();
+        customer.put("city", string);
+
+        System.out.println("Write car: ");
+
+        string=in.nextLine();
+        customer.put("car",string);
+
+
+        System.out.println("Write job: ");
+        string=in.nextLine();
+        customer.put("job",string);
+        a.add(customer);
+
+        try {
+            FileWriter fileWriter = new FileWriter(way);        
+            fileWriter.write(a.toJSONString());
+            fileWriter.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        jsonRead(way);
+        fileDelete(way);
+      
+    }
+	private static void jsonRead(String way) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray a = (JSONArray) parser.parse(new FileReader(way));
+        for (Object o : a)
+        {
+            JSONObject person = (JSONObject) o;
+
+            String name = (String) person.get("name");
+            System.out.println("Name: "+name);
+
+            String city = (String) person.get("city");
+            System.out.println("City: "+city);
+
+            String job = (String) person.get("job");
+            System.out.println("Job: "+job);
+
+            String car = (String) person.get("car");
+            System.out.println("Car: "+car+"");
+
+        }
     }
     public static void NO4() throws IOException {
 
