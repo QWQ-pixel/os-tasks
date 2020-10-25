@@ -1,0 +1,14 @@
+[
+  {
+  "city":"Berlin",
+  "car":"audi",
+  "name":"John",
+  "job":"Teacher"
+  },
+  {"city":"Oslo",
+    "car":"VW",
+    "name":"Mark",
+    "job":"Doctor"
+  }
+
+]
