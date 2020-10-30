@@ -50,6 +50,7 @@ public class PassCheck extends Thread{
                     count++;
                      Instant finish1 = Instant.now();
                     long elapsed1 = Duration.between(start1, finish1).toMillis();
+                    start1=Instant.now();
                     System.out.println("Password: " + password + " Hashcode: " + sb.toString());
                     System.out.println("Time for check password: " + (elapsed1 / 1000) + " sec");
                 }
